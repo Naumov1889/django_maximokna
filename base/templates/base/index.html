@@ -1,0 +1,255 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="bg-video-section js-bg-video-section">
+    <div class="bg-video-section__overflow js-bg-video-section__overflow"></div>
+    <video class="bg-video-section__video js-bg-video-section__video" loop autoplay muted>
+        <source src="{% static 'base/video/bg-mp4.mp4' %}" type="video/mp4">
+        <source src="{% static 'base/video/bg-webm.webm' %}" type="video/webm">
+    </video>
+    <div class="first-screen-section">
+        <div class="first-screen-section__img-bg first-screen-section__img-bg_tablet" style="background-image: url({{ first_screen_img.tablet.url }})"></div>
+          <div class="first-screen-section__img-bg first-screen-section__img-bg_mobile" style="background-image: url({{ first_screen_img.mobile.url }})"></div>
+        <div class="container first-screen-section__grid h-bg-video-section-content-visible">
+            <h1 class="title_h1 first-screen-section__h1">Наша компания уже 17 лет занимается производством и продажей
+                окон с установкой под ключ в Москве и в Московской области!</h1>
+            <div class="first-screen-section__nav">
+                <a class="first-screen-section__btn btn btn_primary" href="{% url 'base:home' %}#anchor-product-service">Продукция
+                и услуги</a>
+                <a class="first-screen-section__btn btn btn_transparent {% if first_screen_img.isDark %}first-screen-section__btn_dark-text{% endif %}" href="{% url 'gallery:video' %}">Наши работы</a></div>
+        </div>
+    </div>
+    <div class="product-service-section" id="anchor-promotion">
+        <div class="container h-bg-video-section-content-visible">
+            <div class="slider-container">
+                <div class="slider js-slider">
+                    {% for banner in banners %}
+                    <a class="slider__item"
+                       {% if banner.link %}href="{{ banner.link }}"{% endif %}
+                       {% if banner.link == 'modal'%}data-popbox-target="popbox-callback-2"{% endif %}>
+                        <picture>
+                            <source media="(max-width: 600px" srcset="{{ banner.mobile.url }}">
+                            <source media="(max-width: 750px" srcset="{{ banner.tablet.url }}">
+                            <img src="{{ banner.desktop.url }}">
+                        </picture>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="title-content-grid">
+                <h2 class="title_h2">Продукция и услуги</h2>
+                <div class="product-service-grid">
+                    <div class="product-grid ">
+                        {{ config.PRODUCT_MENU|safe }}
+                    </div>
+                    {{ config.SERVICE_MENU|safe }}
+                </div>
+            </div>
+            <div class="logo-list product-service-section__logo-list"><i
+                    class="logo-list__item partner partner_rehau"></i><i
+                    class="logo-list__item partner partner_provedal"></i><i
+                    class="logo-list__item partner partner_kbe"></i><i
+                    class="logo-list__item partner partner_brusbox"></i><i
+                    class="logo-list__item partner partner_roto"></i><i
+                    class="logo-list__item partner partner_slidors"></i></div>
+        </div>
+    </div>
+</div>
+<div class="h-bg-video-section-content-visible" style="background-color: #f6f6f6;">
+    <div class="portfolio-section" id="anchor-portfolio">
+        <div class="photo-subsection">
+            <div class="container">
+                <div class="title_h2">Фото работ</div>
+                <ul class="tab-title" data-tabs>
+                    {% for category in photoCategories %}
+                    <li class="tab-title__item">
+                        <a class="tab-title__link" {% if forloop.counter == 1 %}data-tabby-default{%endif%} href="#portfolio-gallery-tab-{{forloop.counter}}">{{ category.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <ul class="tab-content portfolio-gallery__tab-content-container">
+                {% for category in photoCategories %}
+                <li class="tab-content__item" id="portfolio-gallery-tab-{{forloop.counter}}">
+                    <div class="slider-gallery-container js-slider-gallery-container">
+                        <div class="slider-gallery js-slider-gallery">
+                            {% for photo in category.portfoliophoto_set.all %}
+                            <div class="slider-gallery__item">
+                                <img class="slider-gallery__img"
+                                         src="{{ photo.picture_top.url }}">
+                                {% if photo.picture_bottom %}
+                                    <img class="slider-gallery__img"
+                                         src="{{ photo.picture_bottom.url }}">
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="slider-gallery__card">
+                            <div class="slider-gallery__text">{{ category.text }}</div>
+                            <div class="slider-gallery__controls js-slider-gallery__controls">
+                                <button class="slider-gallery__prev"><i class="icon icon_arrow icon_arrow_white"></i>
+                                </button>
+                                <button class="slider-gallery__next"><i
+                                        class="icon icon_arrow icon_arrow_white icon_arrow_right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="video-subsection" id="anchor-feedback">
+            <div class="container">
+                <div class="title-content-grid">
+                    <div class="title_h2">Видео отзывы</div>
+                    <div class="video-feedback-gallery js-video-feedback-gallery">
+                        <div class="video-feedback-gallery__player-container js-video-feedback-gallery__player-container"
+                             data-js-video-thumbnail="{% static 'base/img/picture-video-thumbnail-1.jpg' %}"
+                             data-js-video-youtube-id="rZQRQ0jaWbw">
+                            <div id="js-video-feedback-gallery-player-placeholder"></div>
+                        </div>
+                        <div class="video-feedback-gallery__thumbnails">
+                            <div class="video-feedback-gallery__thumbnail-container js-video-feedback-gallery__thumbnail-container"
+                                 data-js-video-thumbnail="{% static 'base/img/picture-video-thumbnail-2.jpg' %}"
+                                 data-js-video-youtube-id="0cl-820Pt84"><img
+                                    class="js-video-feedback-gallery__thumbnail"
+                                    src="{% static 'base/img/picture-video-thumbnail-2.jpg' %}"></div>
+                            <div class="video-feedback-gallery__thumbnail-container js-video-feedback-gallery__thumbnail-container"
+                                 data-js-video-thumbnail="{% static 'base/img/picture-video-thumbnail-3.jpg' %}"
+                                 data-js-video-youtube-id="zwVxHj9qA9M"><img
+                                    class="js-video-feedback-gallery__thumbnail"
+                                    src="{% static 'base/img/picture-video-thumbnail-3.jpg' %}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="callback-section">
+        <div class="container title-content-grid callback-section__title-content-grid">
+            <div class="callback-section__title">Оставьте свои контакты для консультации по проекту</div>
+            <div class="form-container">
+                <form class="form" method="POST">
+                    {% csrf_token %}
+                    <div class="form-input-container">
+                        {{ callback_form.name }}
+                        {{ callback_form.phone }}
+                        {{ callback_form.email }}
+                        <!--                        <input class="input form__input" placeholder="Имя" type="text">-->
+                        <!--                        <input class="input form__input" placeholder="Телефон" type="tel" required>-->
+                        <!--                        <input class="input form__input" placeholder="e-mail" type="email">-->
+                    </div>
+                    <div class="g-recaptcha form-recaptcha"
+                         data-sitekey="6LcCZ8YUAAAAAKHMwz1jzeAQF34ohag6R50IGcVU"></div>
+                    <button class="btn btn_green form__btn js-callback-btn" type="submit">ОТПРАВИТЬ</button>
+                    <!--label(class="checkbox form-checkbox")-->
+                    <!--    span.checkbox__text Согласие на обработку <a class="text_underline_hoverable" href="">персональных данных</a>-->
+                    <!--    input(class="checkbox__input" type="checkbox")-->
+                    <!--    i.checkbox__checkmark-->
+                </form>
+                <p class="form-agreement">Нажимая кнопку, вы соглашаетесь с условиями <a
+                        class="text_underline_hoverable" href="{% url 'base:policy_page' %}">Политики конфиденциальностих</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="about-section" id="anchor-about">
+        <div class="container">
+            <div class="title_h2">Причины выбрать MaximOkna</div>
+        </div>
+        <div class="name-card-container"><img class="name-card-container__img"
+                                              src="{% static 'base/img/picture-maxim.jpg' %}" alt="Максим Мягков"><img
+                class="name-card-container__img name-card-container__img_mob"
+                src="{% static 'base/img/picture-maxim-mobile.jpg' %}" alt="Максим Мягков">
+            <div class="container">
+                <div class="name-card name-card-container__name-card">
+                    <div class="name-card__title">Максим Мягков</div>
+                    <div class="name-card__subtitle">директор компании</div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="container_shifted">
+                <div class="about-article js-about-article">
+                    <p class="about-article__p">Уже 11 лет лично выезжает на замер и приёмку работ по объекту, так как
+                        считает, что каждый заказ должен быть выполнен на 5+. "С 10 лет я подрабатывал с отцом в цехе по
+                        производству деревянных дверей. Именно тогда я полюбил работу "руками". Особенно радовали
+                        моменты, когда ты видишь результат своего многочасового труда.</p>
+                    <p class="about-article__p">Людям нравилось качество моей работы и умение показать и рассказать, что
+                        и для чего я делаю, почему в этом случае лучше поставить пластиковые окна, а в другом -
+                        алюминиевые. Многие звонили для дополнительных консультаций и начали заказывать установку окон
+                        лично у меня.</p>
+                </div>
+                <div class="about-section-feature-list-container">
+                    <div class="bg-text-maximokna"><span>MAXIMOKNA</span></div>
+                    <div class="feature-list about-section__feature-list">
+                        <div class="feature feature-list__feature">
+                            <div class="feature__title">15</div>
+                            <div class="feature__subtitle">лет по рекомендациям</div>
+                        </div>
+                        <div class="feature feature-list__feature">
+                            <div class="feature__title">1000+</div>
+                            <div class="feature__subtitle">довольных клиентов</div>
+                        </div>
+                        <div class="feature feature-list__feature">
+                            <div class="feature__title">95%</div>
+                            <div class="feature__subtitle">клиентов рекомендуют друзьям</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-section__advantage">
+                <div class="bg-text-maximokna"><span>MAXIMOKNA</span></div>
+                <div class="container_shifted">
+                    <div class="title_h2 title_black">Наши преимущества</div>
+                    <div class="slider-container slider_has-text">
+                        <div class="slider js-slider">
+                            {% for advantage in advantages %}
+                            <div class="slider__item">
+                                <div class="slider__content">
+                                    <div class="slider__bg-text text_color_white">{{ forloop.counter }}</div>
+                                    <div class="slider__text slider__65">
+                                        <div class="slider__title">{{ advantage.title }}</div>
+                                        <div class="slider__p">{{ advantage.text }}</div>
+                                    </div>
+                                    <img class="slider__img slider__35"
+                                         src="{{ advantage.picture.url }}">
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact-section" id="anchor-contact">
+        <div class="container">
+            <div class="title_h2">Нас легко найти</div>
+            <div class="contact-box-grid">
+                <a class="contact-box contact-box_50 btn btn_gradient" href="tel:{{ config.PHONE }}">
+                    <span class="contact-box__text_type-1">{{ config.PHONE }}</span>
+                </a>
+                <a class="contact-box contact-box_50" href="mailto:{{ config.EMAIL }}">
+                    <span class="contact-box__text_type-2">{{ config.EMAIL }}</span>
+                </a>
+                <a class="contact-box contact-box_30" href="https://instagram.com/maximokna.ru?igshid=11c4qnasblscy">
+                    <i class="icon icon_instagram icon_instagram_colorful contact-box__icon"></i>
+                    <span class="contact-box__text_type-3">maximokna.ru</span>
+                </a>
+                <a class="contact-box contact-box_30" href="https://www.youtube.com/channel/UCJLHsoQzrufip5SK0h4daMQ">
+                    <i class="icon icon_youtube icon_youtube_colorful contact-box__icon"></i>
+                    <span class="contact-box__text_type-3">MaximOkna</span>
+                </a>
+                <a class="contact-box contact-box_30"
+                   href="https://api.whatsapp.com/send?phone=79262266844&amp;text=%D0%AF%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D1%83%20%D0%BE%D0%BA%D0%BE%D0%BD%20%D1%83%20%D0%B2%D0%B0%D1%81!)">
+                    <i class="icon icon_whatsapp icon_whatsapp_colorful-2 contact-box__icon"></i>
+                    <span class="contact-box__text_type-3">MaximOkna</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

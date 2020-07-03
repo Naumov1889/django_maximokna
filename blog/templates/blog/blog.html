@@ -1,0 +1,167 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="blog-page content_has-padding_bottom">
+    <div class="container">
+        <div class="title_h1 blog-page__title">Статьи</div>
+        {{ pagination_html|safe }}
+        <div class="post-list">
+            {% for post in posts %}
+            {% if forloop.counter|divisibleby:2 %}
+            <div class="post post_text-pos_right">
+                <div class="post__content">
+                    <a class="post__title" href="{% url 'blog:post' post.slug %}">{{ post.title }}</a>
+                    <div class="post__subtitle">{{ post.subtitle }}</div>
+                    <div class="post__text"><p>
+                        {{ post.text|striptags|truncatewords:65 }}
+                    </p></div>
+                    <a class="post__btn btn btn_transparent" href="{% url 'blog:post' post.slug %}">Читать</a>
+                </div>
+                <div class="post__img-container">
+                    <img class="post__img" src="{{ post.img_square.url }}"/></div>
+            </div>
+            {% else %}
+            <div class="post">
+                <div class="post__content">
+                    <a class="post__title" href="{% url 'blog:post' post.slug %}">{{ post.title }}</a>
+                    <div class="post__subtitle">{{ post.subtitle }}</div>
+                    <div class="post__text"><p>{{ post.text|striptags|truncatewords:65 }}</p></div>
+                    <a class="post__btn btn btn_transparent" href="{% url 'blog:post' post.slug %}">Читать</a>
+                </div>
+                <div class="post__img-container">
+                    <img class="post__img" src="{{ post.img_square.url }}"/></div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+
+            <!--            <div class="post">-->
+            <!--                <div class="post__content">-->
+            <!--                    <div class="post__title">Фурнитура</div>-->
+            <!--                    <div class="post__subtitle">Roto, Maco, Siеgenia-Аubi, Winkhous, Vorno, Internica и другие.</div>-->
+            <!--                    <div class="post__text"><p>Выбор фурнитуры у заводов-производителей окон ПВХ, к которым Вы-->
+            <!--                        обращаетесь, обычно сводится к одному или максимум двум типам с которыми работают эти самые-->
+            <!--                        производства (как правило премиальную и эконом). Самыми востребованными на рынке и являются те,-->
+            <!--                        которые я перечислил выше. В чем же их отличия, как не ошибиться при выборе фурнитуры для окон,-->
+            <!--                        ведь от надёжности работы механизмов зависит срок их службы и комфорт.</p></div>-->
+            <!--                    <a class="post__btn btn btn_transparent" href="">Читать</a>-->
+            <!--                </div>-->
+            <!--                <div class="post__img-container">-->
+            <!--                    <img class="post__img"-->
+            <!--                         srcset="{% static 'base/img/picture-blog-1-mobile.jpg' %} 500w,-->
+            <!--                                 {% static 'base/img/picture-blog-1.jpg' %} 1000w"-->
+            <!--                         src="{% static 'base/img/picture-blog-1.jpg' %}"/></div>-->
+            <!--            </div>-->
+            <!--            <div class="post post_text-pos_right">-->
+            <!--                <div class="post__content">-->
+            <!--                    <div class="post__title">Выбор профиля</div>-->
+            <!--                    <div class="post__subtitle">Поможем Вам выбрать профиль оконного изделия.</div>-->
+            <!--                    <div class="post__text"><p>У всех есть весь набор механизмов необходимых для долговечной работы окон-->
+            <!--                        во всех режимах. Обратить внимание следует на выбор балалконной защёлки (более удобные и-->
+            <!--                        современные - это магнитные).</p>-->
+            <!--                        <p>Защита от проникновения, противовзломность окон - это дополнительная опция фурнитуры.</p>-->
+            <!--                    </div>-->
+            <!--                    <a class="post__btn btn btn_transparent" href="">Читать</a>-->
+            <!--                </div>-->
+            <!--                <div class="post__img-container"><img class="post__img"-->
+            <!--                                                      srcset="{% static 'base/img/picture-blog-2-mobile.jpg' %} 500w, {% static 'base/img/picture-blog-2.jpg' %} 1000w"-->
+            <!--                                                      src="{% static 'base/img/picture-blog-2.jpg' %}"/></div>-->
+            <!--            </div>-->
+            <!--            <div class="post">-->
+            <!--                <div class="post__content">-->
+            <!--                    <div class="post__title">Регулировка пластиковых окон</div>-->
+            <!--                    <div class="post__subtitle">Путеводитель по самостоятельной настройке окон.</div>-->
+            <!--                    <div class="post__text"><p>Ещё один важный фактор выбора фурнитуры это диапазоны регулировки-->
+            <!--                        механизмов петель в трёхмерном измерении. Соответственно более дорогие и высококласные-->
+            <!--                        производители имеют больший диапазон смещения створки относительно рамы и тем самым нивелируют-->
+            <!--                        неточности допусков сборки изделий и незначительных перекосов при монтаже, с ней легче-->
+            <!--                        работать.</p></div>-->
+            <!--                    <a class="post__btn btn btn_transparent" href="">Читать</a>-->
+            <!--                </div>-->
+            <!--                <div class="post__img-container"><img class="post__img"-->
+            <!--                                                      srcset="{% static 'base/img/picture-blog-3-mobile.jpg' %} 500w, {% static 'base/img/picture-blog-3.jpg' %} 1000w"-->
+            <!--                                                      src="{% static 'base/img/picture-blog-3.jpg' %}"/></div>-->
+            <!--            </div>-->
+            <!--            <div class="post post_text-pos_right">-->
+            <!--                <div class="post__content">-->
+            <!--                    <div class="post__title">Пластиковые окна</div>-->
+            <!--                    <div class="post__subtitle">размеры и цены</div>-->
+            <!--                    <div class="post__text"><p> У всех есть весь набор механизмов необходимых для долговечной работы-->
+            <!--                        окон во всех режимах. Обратить внимание следует на выбор балалконной защёлки (более удобные и-->
+            <!--                        современные - это магнитные).</p>-->
+            <!--                        <p>Защита от проникновения, противовзломность окон - это дополнительная опция фурнитуры.</p>-->
+            <!--                    </div>-->
+            <!--                    <a class="post__btn btn btn_transparent" href="">Читать</a>-->
+            <!--                </div>-->
+            <!--                <div class="post__img-container"><img class="post__img"-->
+            <!--                                                      srcset="{% static 'base/img/picture-blog-4-mobile.jpg' %} 500w, {% static 'base/img/picture-blog-4.jpg' %} 1000w"-->
+            <!--                                                      src="{% static 'base/img/picture-blog-4.jpg' %}"/></div>-->
+            <!--            </div>-->
+            <!--            <div class="post">-->
+            <!--                <div class="post__content">-->
+            <!--                    <div class="post__title">Фурнитура</div>-->
+            <!--                    <div class="post__subtitle">Roto, Maco, Siеgenia-Аubi, Winkhous, Vorno, Internica и другие.</div>-->
+            <!--                    <div class="post__text"><p>Выбор фурнитуры у заводов-производителей окон ПВХ, к которым Вы-->
+            <!--                        обращаетесь, обычно сводится к одному или максимум двум типам с которыми работают эти самые-->
+            <!--                        производства (как правило премиальную и эконом). Самыми востребованными на рынке и являются те,-->
+            <!--                        которые я перечислил выше. В чем же их отличия, как не ошибиться при выборе фурнитуры для окон,-->
+            <!--                        ведь от надёжности работы механизмов зависит срок их службы и комфорт.</p></div>-->
+            <!--                    <a class="post__btn btn btn_transparent" href="">Читать</a>-->
+            <!--                </div>-->
+            <!--                <div class="post__img-container"><img class="post__img"-->
+            <!--                                                      srcset="{% static 'base/img/picture-blog-1-mobile.jpg' %} 500w, {% static 'base/img/picture-blog-1.jpg' %} 1000w"-->
+            <!--                                                      src="{% static 'base/img/picture-blog-1.jpg' %}"/></div>-->
+            <!--            </div>-->
+            <!--            <div class="post post_text-pos_right">-->
+            <!--                <div class="post__content">-->
+            <!--                    <div class="post__title">Выбор профиля</div>-->
+            <!--                    <div class="post__subtitle">Поможем Вам выбрать профиль оконного изделия.</div>-->
+            <!--                    <div class="post__text"><p>У всех есть весь набор механизмов необходимых для долговечной работы окон-->
+            <!--                        во всех режимах. Обратить внимание следует на выбор балалконной защёлки (более удобные и-->
+            <!--                        современные - это магнитные).</p>-->
+            <!--                        <p>Защита от проникновения, противовзломность окон - это дополнительная опция фурнитуры.</p>-->
+            <!--                    </div>-->
+            <!--                    <a class="post__btn btn btn_transparent" href="">Читать</a>-->
+            <!--                </div>-->
+            <!--                <div class="post__img-container"><img class="post__img"-->
+            <!--                                                      srcset="{% static 'base/img/picture-blog-2-mobile.jpg' %} 500w, {% static 'base/img/picture-blog-2.jpg' %} 1000w"-->
+            <!--                                                      src="{% static 'base/img/picture-blog-2.jpg' %}"/></div>-->
+            <!--            </div>-->
+            <!--            <div class="post">-->
+            <!--                <div class="post__content">-->
+            <!--                    <div class="post__title">Регулировка пластиковых окон</div>-->
+            <!--                    <div class="post__subtitle">Путеводитель по самостоятельной настройке окон.</div>-->
+            <!--                    <div class="post__text"><p>Ещё один важный фактор выбора фурнитуры это диапазоны регулировки-->
+            <!--                        механизмов петель в трёхмерном измерении. Соответственно более дорогие и высококласные-->
+            <!--                        производители имеют больший диапазон смещения створки относительно рамы и тем самым нивелируют-->
+            <!--                        неточности допусков сборки изделий и незначительных перекосов при монтаже, с ней легче-->
+            <!--                        работать.</p></div>-->
+            <!--                    <a class="post__btn btn btn_transparent" href="">Читать</a>-->
+            <!--                </div>-->
+            <!--                <div class="post__img-container"><img class="post__img"-->
+            <!--                                                      srcset="{% static 'base/img/picture-blog-3-mobile.jpg' %} 500w, {% static 'base/img/picture-blog-3.jpg' %} 1000w"-->
+            <!--                                                      src="{% static 'base/img/picture-blog-3.jpg' %}"/></div>-->
+            <!--            </div>-->
+            <!--            <div class="post post_text-pos_right">-->
+            <!--                <div class="post__content">-->
+            <!--                    <div class="post__title">Пластиковые окна</div>-->
+            <!--                    <div class="post__subtitle">размеры и цены</div>-->
+            <!--                    <div class="post__text"><p> У всех есть весь набор механизмов необходимых для долговечной работы-->
+            <!--                        окон во всех режимах. Обратить внимание следует на выбор балалконной защёлки (более удобные и-->
+            <!--                        современные - это магнитные).</p>-->
+            <!--                        <p>Защита от проникновения, противовзломность окон - это дополнительная опция фурнитуры.</p>-->
+            <!--                    </div>-->
+            <!--                    <a class="post__btn btn btn_transparent" href="">Читать</a>-->
+            <!--                </div>-->
+            <!--                <div class="post__img-container"><img class="post__img"-->
+            <!--                                                      srcset="{% static 'base/img/picture-blog-4-mobile.jpg' %} 500w, {% static 'base/img/picture-blog-4.jpg' %} 1000w"-->
+            <!--                                                      src="{% static 'base/img/picture-blog-4.jpg' %}"/></div>-->
+            <!--            </div>-->
+        </div>
+        {{ pagination_html|safe }}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="blog-inner content_has-padding_bottom">
+    <style>
+        .article ul,
+        .article ul li {
+            list-style-type: disc;
+            list-style-position: inside;
+        }
+
+        .article ol,
+        .article ol li {
+            list-style-type: decimal;
+            list-style-position: inside;
+        }
+
+        .article ul ul, .article ol ul {
+            list-style-type: circle;
+            list-style-position: inside;
+            margin-left: 15px;
+        }
+
+        .article ol ol, .article ul ol {
+            list-style-type: lower-latin;
+            list-style-position: inside;
+            margin-left: 15px;
+        }
+
+        .article ul,
+        .article ol {
+            list-style: initial;
+            margin: initial;
+            padding: 0 0 0 40px;
+        }
+
+        .article li {
+            display: list-item;
+        }
+    </style>
+    <div class="article-header">
+        <img src="{{ article.img_long.url }}">
+        <div>
+            <a class="article-header__get-back" href="{% url 'blog:home' %}"><i class="icon icon_arrow_type-2"></i>Вернуться
+                к блогу</a>
+            <div class="article-header__title">{{ article.title }}</div>
+            <div class="article-header__subtitle">{{ article.subtitle }}</div>
+        </div>
+    </div>
+    <div class="article">
+        {{ article.text|safe }}
+    </div>
+</div>
+
+{% endblock %}

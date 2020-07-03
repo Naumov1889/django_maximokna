@@ -1,0 +1,24 @@
+{% extends 'base/gallery-base.html' %}
+
+{% block gallery_content %}
+{% load static %}
+
+{{ pagination_html|safe }}
+
+<div class="photo-gallery js-photo-gallery photo-gallery_has-padding_top">
+    {% for photo in photos %}
+    <figure class="photo-gallery__item">
+        <a class="photo-gallery__img" href="{{ photo.picture.url }}"
+           data-size="{{ photo.picture.width }}x{{ photo.picture.height }}">
+            <img class="photo-gallery__thumbnail" src="{{ photo.thumbnail.url }}" alt="{{ photo.caption }}">
+        </a>
+        <figcaption class="photo-gallery__caption">{{ photo.caption }}</figcaption>
+    </figure>
+    {% endfor %}
+
+</div>
+
+{{ pagination_html|safe }}
+
+
+{% endblock %}

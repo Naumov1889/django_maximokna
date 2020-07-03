@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% load static %}
+    <div class="callback-page">
+        <div class="container">
+            <div class="container_shifted">
+                <div class="title_h1_type-2 callback-page__title">
+                    <div class="callback-page__title-text"><span
+                            class="text_color_primary text_weight_black callback-page__title-first-line">ЗАПИШИСЬ</span>
+                        НА БЕСПЛАТНЫЙ ЗАМЕР
+                    </div>
+                </div>
+                <div class="subtitle_type-2 callback-page__subtitle"><span class="callback-page__subtitle-first-line">Заполните форму обратной связи, мы сами</span>
+                    наберем Вам для уточнения деталей!
+                </div>
+                <div class="form-container">
+                    <form class="form callback-page__form" method="POST" action="">
+                        <div class="form-input-container">
+                            {{ callback_form.name }}
+                            {{ callback_form.phone }}
+                        </div>
+                        <div class="form-when-to-call"><span class="when-to-call__text">Когда вам позвонить?</span>
+                            <select name="when-to-call">
+                                <option value="сейчас">Сейчас</option>
+                                <option value="с 9 до 12">с 9 до 12</option>
+                                <option value="с 12 до 15">с 12 до 15</option>
+                                <option value="с 15 до 18">с 15 до 18</option>
+                                <option value="с 18 до 21">с 18 до 21</option>
+                            </select>
+                        </div>
+                        <div class="g-recaptcha form-recaptcha"
+                             data-sitekey="6LcCZ8YUAAAAAKHMwz1jzeAQF34ohag6R50IGcVU"></div>
+                        <button class="btn btn_green form__btn" type="submit">Отправить заявку</button>
+                    </form>
+                    <p class="form-agreement">Нажимая кнопку, вы соглашаетесь с условиями <a
+                            class="text_underline_hoverable" href="{% url 'base:policy_page' %}">Политики конфиденциальностих</a></p>
+                </div>
+                <div class="callback-page__contact-container"><a class="callback-page__contact" href="tel:{{ config.PHONE }}">{{ config.PHONE }}</a><a class="callback-page__contact" href="mailto:{{ config.EMAIL }}">{{ config.EMAIL }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

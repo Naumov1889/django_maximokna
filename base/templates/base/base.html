@@ -1,0 +1,506 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru-Ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <title>MaximOkna — Установка и ремонт пластиковых окон в Москве и Московской области</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'base/img/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'base/img/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'base/img/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'base/img/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'base/img/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;display=swap&amp;subset=cyrillic,cyrillic-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/tiny-slider.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.min.css">
+    <link rel="stylesheet" href="{% static 'base/css/concat-css-libs.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/concat-css.css' %}">
+</head>
+<body>
+<div class="popbox_main_content">
+    <header class="header js-header h-bg-video-section-content-visible_higher-priority">
+        <div class="container header__grid">
+            {% url 'base:home' as index_page_path %}
+            {% if request.path == index_page_path %}
+            <div class="logo header__logo">
+                <svg class="logo__img" xmlns="http://www.w3.org/2000/svg" width="50" height="46" viewBox="0 0 50 46">
+                    <defs>
+                        <clipPath id="4e8ya">
+                            <path fill="#fff"
+                                  d="M3.034 23c0-12.703 10.074-23 22.5-23 12.427 0 22.5 10.297 22.5 23s-10.073 23-22.5 23c-12.426 0-22.5-10.297-22.5-23z"/>
+                        </clipPath>
+                    </defs>
+                    <g>
+                        <g>
+                            <path class="logo__circle" fill="none" stroke="#f97632" stroke-miterlimit="50"
+                                  stroke-width="6"
+                                  d="M3.034 23c0-12.703 10.074-23 22.5-23 12.427 0 22.5 10.297 22.5 23s-10.073 23-22.5 23c-12.426 0-22.5-10.297-22.5-23z"
+                                  clip-path="url(&quot;#4e8ya&quot;)"/>
+                        </g>
+                        <g>
+                            <path class="logo__line" fill="none" stroke="#1d1d1d" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-miterlimit="50" stroke-width="3"
+                                  d="M2 31.325v0l15.28-15.281v0l15.281 15.28v0l7.847-7.846v0l7.846 7.847v0"/>
+                        </g>
+                    </g>
+                </svg>
+                <span class="logo__title header__logo-title">Maxim<span
+                        class="text_weight_bold text_color_primary">Okna</span></span>
+            </div>
+            {% else %}
+            <a class="logo header__logo" href="{{ index_page_path }}">
+                <svg class="logo__img" xmlns="http://www.w3.org/2000/svg" width="50" height="46" viewBox="0 0 50 46">
+                    <defs>
+                        <clipPath id="4e8ya">
+                            <path fill="#fff"
+                                  d="M3.034 23c0-12.703 10.074-23 22.5-23 12.427 0 22.5 10.297 22.5 23s-10.073 23-22.5 23c-12.426 0-22.5-10.297-22.5-23z"/>
+                        </clipPath>
+                    </defs>
+                    <g>
+                        <g>
+                            <path class="logo__circle" fill="none" stroke="#f97632" stroke-miterlimit="50"
+                                  stroke-width="6"
+                                  d="M3.034 23c0-12.703 10.074-23 22.5-23 12.427 0 22.5 10.297 22.5 23s-10.073 23-22.5 23c-12.426 0-22.5-10.297-22.5-23z"
+                                  clip-path="url(&quot;#4e8ya&quot;)"/>
+                        </g>
+                        <g>
+                            <path class="logo__line" fill="none" stroke="#1d1d1d" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-miterlimit="50" stroke-width="3"
+                                  d="M2 31.325v0l15.28-15.281v0l15.281 15.28v0l7.847-7.846v0l7.846 7.847v0"/>
+                        </g>
+                    </g>
+                </svg>
+                <span class="logo__title header__logo-title">Maxim<span
+                        class="text_weight_bold text_color_primary">Okna</span></span>
+            </a>
+            {% endif %}
+
+
+            <div class="burger-nav js-burger-nav h-hide {% if black_burger %}burger_mob_black{% endif %}">
+                <button class="burger js-burger"><i></i></button>
+                <div class="header-nav-container">
+                    <ul class="nav header-nav">
+                        <li class="nav__item header-nav__item">
+                            <div class="drop nav-drop"><a class="nav__link header-nav__link"
+                                                          href="{% url 'base:home' %}#anchor-product-service">Продукция&nbsp<span
+                                    class="product-service-link__service">и услуги</span></a>
+                                <div class="drop__content nav-drop__content">
+                                    <div class="product-service-grid">
+                                        <div class="product-grid">
+                                            {{ config.PRODUCT_MENU|safe }}
+                                        </div>
+                                        <div class="service-list-container">
+                                            {{ config.SERVICE_MENU|safe }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav__item header-nav__item"><a class="nav__link header-nav__link"
+                                                                  href="{% url 'base:home' %}#anchor-about">О
+                            компании</a></li>
+                        <li class="nav__item header-nav__item"><a class="nav__link header-nav__link"
+                                                                  href="{% url 'base:home' %}#anchor-feedback">Отзывы</a>
+                        </li>
+                        <li class="nav__item header-nav__item"><a class="nav__link header-nav__link"
+                                                                  href="{% url 'gallery:video' %}">Наши
+                            работы</a>
+                        </li>
+                        <li class="nav__item header-nav__item"><a class="nav__link header-nav__link"
+                                                                  href="{% url 'base:home' %}#anchor-promotion">Акции</a>
+                        </li>
+                        <li class="nav__item header-nav__item"><a class="nav__link header-nav__link"
+                                                                  href="{% url 'blog:home' %}">Блог</a>
+                        </li>
+                        <li class="nav__item header-nav__item"><a class="nav__link header-nav__link"
+                                                                  href="{% url 'base:home' %}#anchor-contact">Контакты</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="contact-subcontact"><a class="contact-subcontact__contact contact"
+                                               href="tel:{{ config.PHONE }}">{{ config.PHONE }}</a>
+                <div class="contact-subcontact__subcontact text_underline_hoverable text_color_primary"
+                     data-popbox-target="popbox-callback-1">Заказать обратный звонок
+                </div>
+            </div>
+            <div class="header__icon-list icon-list">
+                {% for social in socials %}
+                <a class="icon-list__item icon_desktop"
+                   href="{{ social.link }}">
+                    <i class="icon">
+                        {{social.icon|safe}}
+                    </i>
+                </a>
+                <a class="icon-list__item icon_mobile"
+                   href="{{ social.link }}">
+                    <i class="icon">
+                        {{social.icon_larger|safe}}
+                    </i>
+                </a>
+                {% endfor %}
+
+            </div>
+            <div class="header__work-hours work-hours">
+                <span class="work-hours__number">{{ config.WORK_HOURS|safe }}</span>
+                <span class="work-hours__subtitle">без выходных</span></div>
+            <a class="btn btn_primary header__call-specialist-btn js-header__call-specialist-btn h-hide" href=""
+               data-popbox-target="popbox-callback-2">ВЫЗВАТЬ СПЕЦИАЛИСТА</a>
+        </div>
+    </header>
+    <div class="subheader js-subheader h-bg-video-section-content-visible_higher-priority">
+        <div class="container subheader__grid">
+            <ul class="nav subheader__nav">
+                <li class="nav__item subheader__item">
+                    <div class="drop nav-drop"><a class="nav__link subheader__link"
+                                                  href="{% url 'gallery:video' %}">Продукция&nbsp<span
+                            class="product-service-link__service">и услуги</span></a>
+                        <div class="drop__content nav-drop__content">
+                            <div class="product-service-grid">
+                                <div class="product-grid">
+                                    {{ config.PRODUCT_MENU|safe }}
+                                </div>
+                                <div class="service-list-container">
+                                    {{ config.SERVICE_MENU|safe }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav__item subheader__item"><a class="nav__link subheader__link"
+                                                         href="{% url 'base:home' %}#anchor-about">О компании</a></li>
+                <li class="nav__item subheader__item"><a class="nav__link subheader__link"
+                                                         href="{% url 'base:home' %}#anchor-feedback">Отзывы</a></li>
+
+                <li class="nav__item subheader__item {% if 'gallery' in request.path %}nav__item_active{% endif%}"><a class="nav__link subheader__link"
+                                                         href="{% url 'gallery:video' %}">Наши работы</a>
+                </li>
+
+                <li class="nav__item subheader__item"><a class="nav__link subheader__link"
+                                                         href="{% url 'base:home' %}#anchor-promotion">Акции</a></li>
+
+                <li class="nav__item subheader__item {% if 'blog' in request.path %}nav__item_active{% endif%}"><a class="nav__link subheader__link" href="{% url 'blog:home' %}">Блог</a>
+                </li>
+                <li class="nav__item subheader__item"><a class="nav__link subheader__link"
+                                                         href="{% url 'base:home' %}#anchor-contact">Контакты</a></li>
+                <li class="nav__item subheader__item"><a class="nav__link nav__link_featured subheader__link" href=""
+                                                         data-popbox-target="popbox-callback-2">Вызвать специалиста</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="h-bg-video-section-content-visible">
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-grid__column">
+                    {% if request.path == index_page_path %}
+                    <div class="logo footer__logo">
+                        <svg class="logo__img" xmlns="http://www.w3.org/2000/svg" width="50" height="46"
+                             viewBox="0 0 50 46">
+                            <defs>
+                                <clipPath id="4e8ya">
+                                    <path fill="#fff"
+                                          d="M3.034 23c0-12.703 10.074-23 22.5-23 12.427 0 22.5 10.297 22.5 23s-10.073 23-22.5 23c-12.426 0-22.5-10.297-22.5-23z"/>
+                                </clipPath>
+                            </defs>
+                            <g>
+                                <g>
+                                    <path class="logo__circle" fill="none" stroke="#f97632" stroke-miterlimit="50"
+                                          stroke-width="6"
+                                          d="M3.034 23c0-12.703 10.074-23 22.5-23 12.427 0 22.5 10.297 22.5 23s-10.073 23-22.5 23c-12.426 0-22.5-10.297-22.5-23z"
+                                          clip-path="url(&quot;#4e8ya&quot;)"/>
+                                </g>
+                                <g>
+                                    <path class="logo__line" fill="none" stroke="#ffffff" stroke-linecap="round"
+                                          stroke-linejoin="round" stroke-miterlimit="50" stroke-width="3"
+                                          d="M2 31.325v0l15.28-15.281v0l15.281 15.28v0l7.847-7.846v0l7.846 7.847v0"/>
+                                </g>
+                            </g>
+                        </svg>
+                        <span class="logo__title logo__title_white footer__logo-title">Maxim<span
+                                class="text_weight_bold text_color_primary">Okna</span></span>
+                        <div class="logo__subtitle">Установка и ремонт пластиковых окон в Москве и Московской области
+                        </div>
+                    </div>
+                    {% else %}
+                    <a class="logo footer__logo" href="{{ index_page_path }}">
+                        <svg class="logo__img" xmlns="http://www.w3.org/2000/svg" width="50" height="46"
+                             viewBox="0 0 50 46">
+                            <defs>
+                                <clipPath id="4e8ya">
+                                    <path fill="#fff"
+                                          d="M3.034 23c0-12.703 10.074-23 22.5-23 12.427 0 22.5 10.297 22.5 23s-10.073 23-22.5 23c-12.426 0-22.5-10.297-22.5-23z"/>
+                                </clipPath>
+                            </defs>
+                            <g>
+                                <g>
+                                    <path class="logo__circle" fill="none" stroke="#f97632" stroke-miterlimit="50"
+                                          stroke-width="6"
+                                          d="M3.034 23c0-12.703 10.074-23 22.5-23 12.427 0 22.5 10.297 22.5 23s-10.073 23-22.5 23c-12.426 0-22.5-10.297-22.5-23z"
+                                          clip-path="url(&quot;#4e8ya&quot;)"/>
+                                </g>
+                                <g>
+                                    <path class="logo__line" fill="none" stroke="#ffffff" stroke-linecap="round"
+                                          stroke-linejoin="round" stroke-miterlimit="50" stroke-width="3"
+                                          d="M2 31.325v0l15.28-15.281v0l15.281 15.28v0l7.847-7.846v0l7.846 7.847v0"/>
+                                </g>
+                            </g>
+                        </svg>
+                        <span class="logo__title logo__title_white footer__logo-title">Maxim<span
+                                class="text_weight_bold text_color_primary">Okna</span></span>
+                        <div class="logo__subtitle">Установка и ремонт пластиковых окон в Москве и Московской области
+                        </div>
+                    </a>
+                    {% endif %}
+                    <div class="footer__work-hours work-hours">
+                        <span class="work-hours__number">{{ config.WORK_HOURS|safe }}</span>
+                        <span class="work-hours__subtitle">без выходных</span>
+                    </div>
+                    <div class="footer__copyright">{{ config.COPYRIGHT|safe }}</div>
+                </div>
+                <div class="footer-grid__column">
+                    <div class="footer-grid__row footer-grid__item">
+                        <div class="footer__title">Телефоны</div>
+                        <div class="footer-grid__subcolumn">
+                            <div class="contact-subcontact footer__contact-subcontact"><a
+                                    class="contact-subcontact__contact contact footer__contact"
+                                    href="tel:{{ config.PHONE }}">{{ config.PHONE }}</a>
+                                <div class="contact-subcontact__subcontact text_color_primary">Многоканальный</div>
+                            </div>
+                            <div class="contact-subcontact footer__contact-subcontact"><a
+                                    class="contact-subcontact__contact contact footer__contact"
+                                    href="tel:{{ config.PHONE_2 }}">{{ config.PHONE_2 }}</a>
+                                <div class="contact-subcontact__subcontact text_color_primary">Контроль качества</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-grid__row footer-grid__item">
+                        <div class="footer__title">Почта</div>
+                        <a class="contact footer__contact" href="mailto:{{ config.EMAIL }}">{{ config.EMAIL }}</a>
+                    </div>
+                    <div class="footer-grid__row footer-grid__item">
+                        <div class="footer__title">Соц. сети</div>
+                        <div class="icon-list">
+                            {% for social in socials %}
+                            <a class="icon-list__item"
+                               href="{{ social.link }}">
+                                <i class="icon">
+                                    {{ social.icon|safe }}
+                                </i>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="footer-grid__row footer-grid__item">
+                        <div class="footer__title">Наши адреса</div>
+                        <div class="contact footer__contact footer__address">{{ config.ADDRESS }}</div>
+                    </div>
+                </div>
+                <div class="footer-grid__column">
+                    <div class="footer-grid__subcolumn footer-grid__item">
+                        <div class="footer__title">Навигация</div>
+                        <ul class="nav column">
+                            <li class="nav__item">
+                                <div class="drop nav-drop"><a class="nav__link footer__link"
+                                                              href="{% url 'gallery:video' %}">Продукция&nbsp<span
+                                        class="product-service-link__service">и услуги</span></a>
+                                    <div class="drop__content nav-drop__content">
+                                        <div class="product-service-grid">
+                                            <div class="product-grid">
+                                                {{ config.PRODUCT_MENU }}
+                                                <ul class="product-list">
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Пластasdиковые
+                                                        окна</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Остекление
+                                                        балконов и лоджий</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Остекление
+                                                        квартир</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Балконные
+                                                        двери</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Энергосберегающие
+                                                        окна</a></li>
+                                                </ul>
+                                                <ul class="product-list">
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Остекление
+                                                        загородного дома</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Раздвижные двери и
+                                                        окна</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Остекление беседок
+                                                        и веранд</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Панорамные
+                                                        окна</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Входные двери и
+                                                        группы</a></li>
+                                                </ul>
+                                                <ul class="product-list">
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Фасадное
+                                                        остекление</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Аллюминиевые
+                                                        окна</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Рулонные шторы и
+                                                        жалюзи</a></li>
+                                                    <li class="product__item"><a class="product__link"
+                                                                                 href="gallery.html">Рольставни</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="service-list-container">
+                                                <ul class="service-list">
+                                                    <li class="service__item"><a class="service__link"
+                                                                                 href="gallery.html">Замеvр</a></li>
+                                                    <li class="service__item"><a class="service__link"
+                                                                                 href="gallery.html">Доставка</a></li>
+                                                    <li class="service__item"><a class="service__link"
+                                                                                 href="gallery.html">Монтаж</a></li>
+                                                    <li class="service__item"><a class="service__link"
+                                                                                 href="gallery.html">Сервис</a></li>
+                                                    <li class="service__item"><a class="service__link"
+                                                                                 href="gallery.html">Ремонт</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav__item"><a class="nav__link footer__link"
+                                                     href="{% url 'base:home' %}#anchor-about">О
+                                компании</a></li>
+                            <li class="nav__item"><a class="nav__link footer__link"
+                                                     href="{% url 'base:home' %}#anchor-feedback">Отзывы</a>
+                            </li>
+                            <li class="nav__item"><a class="nav__link footer__link"
+                                                     href="{% url 'base:home' %}#anchor-portfolio">Наши
+                                работы</a></li>
+                            <li class="nav__item"><a class="nav__link footer__link"
+                                                     href="{% url 'base:home' %}#anchor-promotion">Акции</a>
+                            </li>
+                            <li class="nav__item"><a class="nav__link footer__link"
+                                                     href="{% url 'blog:home' %}">Блог</a></li>
+                            <li class="nav__item"><a class="nav__link footer__link"
+                                                     href="{% url 'base:home' %}#anchor-contact">Контакты</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-grid__subcolumn footer-grid__item">
+                        <div class="footer__title">Услуги</div>
+                        {{ config.SERVICE_MENU|safe }}
+                    </div>
+                </div>
+                <div class="footer-grid__column">
+                    <div class="footer__title">Продукция</div>
+                    <div class="product-grid column">
+                        {{ config.PRODUCT_MENU|safe }}
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<div class="popbox" data-popbox-id="popbox-callback-1">
+    <div class="popbox_container">
+        <button class="popbox__cross" data-popbox-close="popbox-callback-1"><i class="icon icon_cross"></i></button>
+        <div class="popbox__box popbox__box_white">
+            <div class="title_h1_type-2 popbox__title"><span
+                    class="text_color_primary text_weight_black">ЗАКАЗАТЬ</span> ОБРАТНЫЙ ЗВОНОК
+            </div>
+        </div>
+        <div class="popbox__box popbox__box_grey">
+            <div class="subtitle_type-2 popbox__subtitle">Заполните форму обратной связи, мы оперативно свяжемся с
+                вами!
+            </div>
+            <div class="form-container">
+                <form class="form" method="POST">
+                    {% csrf_token %}
+                    <div class="form-input-container">
+                        {{ callback_form.name }}
+                        {{ callback_form.phone }}
+                    </div>
+                    <div class="g-recaptcha form-recaptcha"
+                         data-sitekey="6LcCZ8YUAAAAAKHMwz1jzeAQF34ohag6R50IGcVU"></div>
+                    <button class="btn btn_green form__btn js-callback-btn" type="submit">Отправить заявку</button>
+                </form>
+                <p class="form-agreement">Нажимая кнопку, вы соглашаетесь с условиями <a
+                        class="text_underline_hoverable" href="{% url 'base:policy_page' %}">Политики
+                    конфиденциальностих</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popbox popbox_wide" data-popbox-id="popbox-callback-2">
+    <div class="popbox_container">
+        <button class="popbox__cross" data-popbox-close="popbox-callback-2"><i class="icon icon_cross"></i></button>
+        <div class="popbox__box popbox__box_white">
+            <div class="title_h1_type-2 popbox__title"><span
+                    class="text_color_primary text_weight_black">ЗАПИШИСЬ</span> НА БЕСПЛАТНЫЙ ЗАМЕР
+            </div>
+            <div class="popbox__contact-container">
+<a class="popbox__contact" href="tel:{{ config.PHONE }}">{{config.PHONE }}</a>
+<a class="popbox__contact" href="mailto:{{ config.EMAIL }}">{{ config.EMAIL }}</a>
+            </div>
+        </div>
+        <div class="popbox__box popbox__box_grey">
+            <div class="subtitle_type-2 popbox__subtitle">Заполните форму обратной связи, мы сами наберем Вам для
+                уточнения деталей!
+            </div>
+            <div class="form-container">
+                <form class="form" method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-input-container">
+                        {{ callback_form.name }}
+                        {{ callback_form.phone }}
+                    </div>
+                    <div class="form-when-to-call"><span class="when-to-call__text">Когда вам позвонить?</span>
+                        <select name="when-to-call" id="mywhentocall">
+                            <option value="сейчас">Сейчас</option>
+                            <option value="с 9 до 12">с 9 до 12</option>
+                            <option value="с 12 до 15">с 12 до 15</option>
+                            <option value="с 15 до 18">с 15 до 18</option>
+                            <option value="с 18 до 21">с 18 до 21</option>
+                        </select>
+                    </div>
+                    <div class="g-recaptcha form-recaptcha"
+                         data-sitekey="6LcCZ8YUAAAAAKHMwz1jzeAQF34ohag6R50IGcVU"></div>
+                    <button class="btn btn_green form__btn js-callback-btn" type="submit">Отправить заявку</button>
+                </form>
+                <p class="form-agreement">Нажимая кнопку, вы соглашаетесь с условиями <a
+                        class="text_underline_hoverable" href="{% url 'base:policy_page' %}">Политики
+                    конфиденциальностих</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tabby/12.0.3/js/tabby.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+<script src="{% static 'base/js/concat-js-libs.js' %}"></script>
+<script src="{% static 'base/js/common.js' %}"></script>
+
+</body>
+</html>

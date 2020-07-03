@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="gallery-page bg_black content_has-padding_bottom">
+    <div class="container">
+        <ul class="tab-title tab-title_has-padding_top">
+            <li class="tab-title__item">
+                {% url 'gallery:video' as gallery_video_path %}
+                <a class="tab-title__link tab-title__link_smaller js-video-gallery-ajax-link"
+                   href="{% url 'gallery:video' %}"
+                   {% if request.path == gallery_video_path %}
+                   aria-selected=true
+                   {% endif %}>
+                    Видео
+                </a>
+            </li>
+            {% for category in photoCategories %}
+            <li class="tab-title__item js-tab-title__item-photo-category">
+                {% url 'gallery:photo' category.slug as current_gallery_path %}
+                <a class="tab-title__link tab-title__link_smaller js-photo-gallery-ajax-link"
+                   href="{{ current_gallery_path }}"
+                   {% if request.path == current_gallery_path %}
+                   aria-selected=true
+                   {% endif %}>
+                    {{ category.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <ul class="tab-content">
+            <li class="tab-content__item">
+            {% block gallery_content %}
+            {% endblock %}
+            </li>
+
+            <!-- Root element of PhotoSwipe. Must have class pswp.-->
+            <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                <!--
+                Background of PhotoSwipe.
+                It's a separate element, as animating opacity is faster than rgba().
+                -->
+                <div class="pswp__bg"></div>
+                <!-- Slides wrapper with overflow:hidden.-->
+                <div class="pswp__scroll-wrap">
+                    <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory.-->
+                    <!-- don't modify these 3 pswp__item elements, data is added later on.-->
+                    <div class="pswp__container">
+                        <div class="pswp__item"></div>
+                        <div class="pswp__item"></div>
+                        <div class="pswp__item"></div>
+                    </div>
+                    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.-->
+                    <div class="pswp__ui pswp__ui--hidden">
+                        <div class="pswp__top-bar">
+                            <!-- Controls are self-explanatory. Order can be changed.-->
+                            <div class="pswp__counter"></div>
+                            <button class="pswp__button pswp__button--close" title="Закрыть (Esc)">
+                                <!--(title='Close (Esc)')--></button>
+                            <button class="pswp__button pswp__button--fs" title="Полноэкранный режим">
+                                <!--(title='Toggle fullscreen')--></button>
+                            <button class="pswp__button pswp__button--zoom" title="Увеличить/уменьшить">
+                                <!--(title='Zoom in/out')--></button>
+                            <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR-->
+                            <!-- element will get class pswp__preloader--active when preloader is running-->
+                            <div class="pswp__preloader">
+                                <div class="pswp__preloader__icn">
+                                    <div class="pswp__preloader__cut">
+                                        <div class="pswp__preloader__donut"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                            <div class="pswp__share-tooltip"></div>
+                        </div>
+                        <button class="pswp__button pswp__button--arrow--left" title="предыдущий">
+                            <!--(title='Previous (arrow left)')--></button>
+                        <button class="pswp__button pswp__button--arrow--right" title="следующий">
+                            <!--(title='Next (arrow right)')--></button>
+                        <div class="pswp__caption">
+                            <div class="pswp__caption__center"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+
+    </div>
+
+</div>
+{% endblock %}

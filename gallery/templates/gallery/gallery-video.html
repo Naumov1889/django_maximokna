@@ -1,0 +1,38 @@
+{% extends 'base/gallery-base.html' %}
+
+{% block gallery_content %}
+{% load static %}
+
+<div class="bg-text-maximokna"><span>MAXIMOKNA</span></div>
+
+{{ pagination_html|safe }}
+
+<div class="video-gallery">
+    {% for video in videos %}
+    <div class="video-gallery__item">
+        <div class="video-gallery__title">{{ video.title }}</div>
+        <div class="video-gallery__grid">
+            <div class="video-gallery__player">
+                <iframe class="video-gallery__iframe" width="100%" height="100%"
+                        src="https://www.youtube.com/embed/{{video.videoId}}?rel=0&amp;amp;&amp;amp;showinfo=0"
+                        frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-gallery__sidebar">
+                <div class="video-gallery__property-list">
+                    {% for property in video.videoproperty_set.all %}
+                    <div class="video-gallery__property-row">
+                        <div class="video-gallery__property">{{ property.property }}</div>
+                        <div class="video-gallery__description">{{ property.description }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="video-gallery__btn btn btn_primary" href="{% url 'callback:page' %}">Хочу также</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{{ pagination_html|safe }}
+
+{% endblock %}
